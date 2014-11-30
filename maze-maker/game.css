@@ -1,0 +1,127 @@
+html {
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
+    font-weight: bold;
+}
+linearH {
+    display: flex;
+    flex-direction: row;
+}
+div.padding {
+    flex-grow: 1;
+}
+div.maze-container {
+    padding-top: 4em;
+}
+div.controls, div.controls * {
+    text-align: center;
+}
+table.maze{
+    /*border-collapse: collapse;*/
+    border-spacing: 0;
+    border: 2px solid black;
+}
+table.maze td{
+    border: 2px dotted rgba(255,255,255,0.05);
+    background-size: 100% 100%;
+    background-repeat: round;
+    padding: 0 6px;
+    cursor: pointer;
+    position: relative;
+    background-color: darkkhaki;
+}
+table.maze td.stuck.visible {
+    border-color: yellow;
+}
+table.maze td.dead.visible {
+    border-color: red;
+}
+table.maze td:hover {
+    border-color: black !important;
+}
+table.maze td span.top {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: -1.7em;
+    text-align: center;
+}
+table.maze td span.left {
+    position: absolute;
+    width: 3em;
+    left: -4em;
+    top: 25%;
+    text-align: right;
+}
+table.maze td span.bottom {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -1.7em;
+    text-align: center;
+}
+table.maze td span.right {
+    position: absolute;
+    width: 3em;
+    right: -4em;
+    top: 25%;
+    text-align: left;
+}
+table.maze td a:before {
+    content: '_';
+    color: transparent;
+    margin: 0 2px;
+}
+table.maze td.wall {
+    background-image: url("wall.png");
+}
+
+table.maze td.pitfall.visible {
+    background-image: url("pitfall.png");
+}
+table.maze td.spikes.visible {
+    background-image: url("spikes.png");
+}
+table.maze td.fire.visible {
+    background-image: url("fire.png");
+}
+table.maze td.compass.visible {
+    background-image: url("compass.png");
+}
+table.maze td.treasure.visible {
+    background-image: url("treasure.png");
+}
+table.maze td.warp.visible {
+    background-image: url("warp.png");
+}
+table.maze td.prison.visible {
+    background-image: url("prison.png");
+}
+table.maze td.maker a:before {
+    content: '#';
+    /*ಠ*/
+}
+table.maze td.mage.visible a.a:before {
+    content: 'M';
+    color: blue;
+}
+table.maze td.warrior.visible a.b:before {
+    content: 'W';
+    color: brown;
+}
+table.maze td.thief.visible a.c:before {
+    content: 'T';
+    color: darkslategrey;
+}
+table.maze td.cleric.visible a.d:before {
+    content: 'C';
+    color: darkgreen;
+}
+table.maze td.fog:not(.hidefog) {
+    background: #39363f;
+}
+table.maze td.fog:not(.hidefog) a:before {
+    color: transparent !important;
+}
+table.maze td.maker.LOS a:before, table.maze td.maker.initial a:before {
+    color: orangered !important;
+}
