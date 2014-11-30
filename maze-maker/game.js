@@ -5,6 +5,7 @@ var gridHeight = 15, gridWidth = 15;
 var players = null;
 var grid = null;
 var turn = -1;
+var round = 0;
 var compassHolder = null;
 var PLAYER_STATUS = {OK: "ok", STUCK: "stuck", DEAD: "dead", PRISON: "prison"};
 var keymap = {32: "space", 37: "left", 38: "up", 39: "right", 40: "down", 77: "mage", 87: "warrior", 84: "thief", 67: "cleric"};
@@ -33,12 +34,15 @@ $(function () {
 		shuffle(players);
 		initMaze($("#csv").val());
 		turn = 0;
+		round = 1;
 		$("input#moves").val(0);
 		updateGameState();
 	});
 	$("#roll").click(function () {
 		if ($("input#moves").val() * 1 > 0) return;
-		$("input#moves").val(Math.ceil(Math.random() * 6));
+		if (turn < players.length) {
+			$("input#moves").val(Math.ceil(Math.random() * 6));
+		}
 	});
 	$("#reveal").click(function () {
 		$("table.maze td:not(.visible)").addClass("hidefog visible");
@@ -221,6 +225,7 @@ function advanceTurn() {
 		}
 	} else if (turn > players.length) {
 		turn = -1;
+		round++;
 		advanceTurn();
 	}
 }
@@ -260,24 +265,25 @@ function updateFog() {
 }
 
 function updateGameStatus() {
+	$("#round").html("Round# " + round);
 	if (turn < players.length) {
 		$("input#reveal").css("visibility", "hidden");
-		$("div#game-status").html(players[turn].class + "'s<br>turn to move!");
+		$("#game-status").html(players[turn].class + "'s<br>turn to move!");
 	} else {
 		$("input#reveal").css("visibility", "");
-		$("div#game-status").html("maze maker's<br>turn to move!");
+		$("#game-status").html("maze maker's<br>turn to move!");
 	}
 	var okPlayer = false;
 	for (var p in players) {
 		if (grid[players[p].row][players[p].col] == GRID_VALUES.TREASURE) {
-			$("div#game-status").html("GAME OVER<br>players win!");
+			$("#game-status").html("GAME OVER<br>players win!");
 			turn = -1;
 			return;
 		}
 		if (players[p].status == PLAYER_STATUS.OK) okPlayer = true;
 	}
 	if (!okPlayer) {
-		$("div#game-status").html("GAME OVER<br>maze maker wins!");
+		$("#game-status").html("GAME OVER<br>maze maker wins!");
 		turn = -1;
 	}
 }

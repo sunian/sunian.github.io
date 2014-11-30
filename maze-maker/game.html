@@ -31,7 +31,8 @@
     <div class="maze-container"></div>
     <!--<div class="padding"></div>-->
     <div class="controls padding">
-        <div id="game-status">Game not started</div><br>
+        <div id="round">Round# 0</div><br>
+        <div><span id="game-status" style="background: yellow">Game not started</span></div><br>
         Moves left:<br>
         <input id="moves" value="0" /><br><br>
         <input id="roll" type="button" value="Roll d6"><br><br><br><br>
@@ -40,6 +41,52 @@
         <img id="needle" src="needle.png" style="margin: 20px 0; transition: .7s ease-in-out"/>
     </div>
 </linearH>
-
+<br><br>
+<div id="tutorial" style="padding: 8px">
+    <h3>How to Play</h3>
+    <p>First, create a maze roughly of size 15x15, in CSV format. Below is an example.</p>
+    <p>
+        _,_,_,_,_,_,_,_,M,_,_,_,_,_,_<br>
+        _,_,_,_,_,_,_,_,_,_,_,_,_,_,_<br>
+        _,_,_,_,W,T,_,_,_,_,_,_,_,_,_<br>
+        _,_,_,_,W,W,_,W,W,_,_,_,_,_,_<br>
+        _,_,_,_,_,_,_,_,_,_,_,_,_,_,_<br>
+        _,_,_,_,_,_,_,_,_,_,_,_,_,_,_<br>
+        _,_,_,_,_,_,_,_,_,_,_,_,_,_,_<br>
+        _,_,_,1,_,_,_,_,_,_,_,_,_,@,_<br>
+        _,_,_,_,2,_,_,_,_,_,_,_,_,_,_<br>
+        _,_,_,_,_,3,_,_,_,_,_,_,_,_,_<br>
+        _,_,_,_,_,_,_,_,_,_,_,_,_,_,_<br>
+        _,_,_,_,_,_,_,F,_,_,_,_,C,_,_<br>
+        _,_,_,_,_,_,P,_,S,_,_,_,_,_,_<br>
+        _,_,@,_,W,_,W,_,W,_,_,_,_,_,_<br>
+        _,_,_,W,_,_,_,E,_,_,_,_,_,_,_<br>
+    </p>
+    <p>Key:<br>
+        _ Empty space<br>
+        E Entrance to the maze (players start here)<br>
+        W Wall, players may not pass through<br>
+        T Treasure, the goal for the players<br>
+        C Compass, may be picked up by any player, points towards the treasure<br>
+        F Fire trap, mage is immune, fatal to thief<br>
+        P Pitfall trap, warrior is immune, fatal to mage<br>
+        S Spike trap, thief is immune, fatal to warrior<br>
+        M Maze Maker's starting location<br>
+        @ Warp portal<br>
+        1-4 Prisons 1 through 4<br>
+    </p>
+    <p>Cells are separated by commas, and rows are separated by line breaks.</p>
+    <p>Paste this text into the textbox above. Don't worry, your maze will not be visible in the textbox.</p>
+    <p>Select which classes will be in play, and then click Play to start the game.</p>
+    <p>The positions of the players are indicated by the first letter of their class. The position of the Maze Maker (when visible) is indicated by #'s.</p>
+    <p>Each player begins his turn by clicking the Roll dice button. The player may then make that many moves.</p>
+    <p>To move to a cell, simply click on it.</p>
+    <p>Players trapped in a trap or prison will be indicated by a yellow border. Players killed by a trap will be indicated by a red border.</p>
+    <p>To free/revive another player from a trap or prison, you must move onto their cell and click on it again. Doing so will cost 1 move.</p>
+    <p>A player with the compass may pass it to other players in the same cell. Any player in that cell can click it to pass the compass. Doing so does not cost moves.</p>
+    <p>During the Maze Maker's turn, he can use the arrow keys to select a new location within a 3x3 square. Press the spacebar to commit to a location.</p>
+    <p>If the Maze Maker wishes to capture a player on his turn, he must move onto that player's cell and then hit the key corresponding to that player's class instead of hitting the spacebar. That player and the Maze Maker will then both be teleported to a random unused prison.</p>
+    <p>If the Maze Maker forgets his location or the layout of the maze, he can click the Reveal Maze button on his turn. Hitting any key will hide the maze again.</p>
+</div>
 </body>
 </html>
