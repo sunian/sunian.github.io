@@ -338,10 +338,16 @@ function updateMaker() {
 		var rowDiff = Math.sign(maker.row - players[p].row);
 		var colDiff = Math.sign(maker.col - players[p].col);
 		if (rowDiff * colDiff == 0) {
+			if (rowDiff + colDiff == 0) {
+				getCell(maker.row, maker.col).addClass("LOS");
+				return;
+			}
+			if (rowDiff == 0) rowDiff = 1;
+			if (colDiff == 0) colDiff = 1;
 			var hasWall = false;
 			for (var i = players[p].row; i != maker.row + rowDiff; i += rowDiff) {
 				for (var j = players[p].col; j != maker.col + colDiff; j += colDiff) {
-					console.log("checked " + i + " " + j);
+					//console.log("checked " + i + " " + j);
 					if (getCell(i, j).hasClass("wall")) hasWall = true;
 				}
 			}
