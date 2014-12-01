@@ -180,7 +180,7 @@ function cellClicked(e) {
 		var player = players[turn];
 		if (e.data[0] == player.row && e.data[1] == player.col) {
 			if (playerCell.hasClass("stuck") || (player.class == "cleric" && playerCell.hasClass("dead"))) {
-				playerCell.removeClass("stuck dead fire pitfall spikes");
+				playerCell.removeClass("stuck dead");
 				moves--;
 				for (var p in players)
 					if (e.data[0] == players[p].row && e.data[1] == players[p].col)
@@ -296,12 +296,11 @@ function updatePlayer(player) {
 		case GRID_VALUES.FIRE:
 		case GRID_VALUES.PITFALL:
 		case GRID_VALUES.SPIKES:
+			grid[player.row][player.col] = GRID_VALUES.EMPTY;
 			if (playerCell.hasClass(player.fatal)) {
-				grid[player.row][player.col] = GRID_VALUES.EMPTY;
 				player.status = PLAYER_STATUS.DEAD;
 				playerCell.addClass("dead");
 			} else if (!playerCell.hasClass(player.immune)) {
-				grid[player.row][player.col] = GRID_VALUES.EMPTY;
 				player.status = PLAYER_STATUS.STUCK;
 				playerCell.addClass("stuck");
 			}
