@@ -172,7 +172,8 @@ function initMaze(csv) {
 }
 
 function cellClicked(e) {
-	if (turn >= 0 && turn < players.length) {
+	if (turn < 0) return;
+	if (turn < players.length) {
 		var moves = $("input#moves").val() * 1;
 		if (moves == 0) return;
 		var playerCell = getCell(e.data[0], e.data[1]);
@@ -213,6 +214,13 @@ function cellClicked(e) {
 		$("input#moves").val(moves);
 		if (moves == 0) advanceTurn();
 		updateGameState();
+	} else {
+		$("table.maze td.hidefog").removeClass("hidefog visible");
+		$("table.maze td.maker").removeClass("initial");
+		if (Math.abs(e.data[1] - maker.col) <= 1 && Math.abs(e.data[0] - maker.row) <= 1) {
+			maker.rowTemp = e.data[0];
+			maker.colTemp = e.data[1];
+		}
 	}
 }
 
