@@ -83,9 +83,11 @@ $(function () {
 					if (getCell(maker.rowTemp, maker.colTemp).hasClass(keymap[e.which])) {
 						for (var p in players) {
 							if (players[p].class == keymap[e.which]) {
-								putInPrison(players[p]);
-								updatePlayer(players[p]);
-								advanceTurn();
+								if (players[p].status == PLAYER_STATUS.OK) {
+									putInPrison(players[p]);
+									updatePlayer(players[p]);
+									advanceTurn();
+								}
 								break;
 							}
 						}

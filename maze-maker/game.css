@@ -11,6 +11,11 @@ div.padding {
 }
 div.maze-container {
     padding-top: 4em;
+
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 div.controls, div.controls * {
     text-align: center;
